@@ -29,6 +29,7 @@ class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterf
 
             $configModel->pluginSetId = $data['pluginSetId'];
             $configModel->deleted = !empty($data['deleted']) ? true : false;
+            $configModel->webstoreId = $data['webstoreId'] ?? null;
 
             $database->save($configModel);
 
@@ -65,13 +66,14 @@ class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterf
      * @param array $data
      * @return bool|mixed
      */
-    public function updateConfig($pluginSetId, array $data)
+    public function updateConfig($pluginSetId, $webstoreId, array $data)
     {
         try {
             $database = pluginApp(DataBase::class);
 
             $configs = $database->query(ShopWizardPreviewConfiguration::class)
                 ->where('pluginSetID', '=', $pluginSetId)
+                ->where('webstoreId', '=', $webstoreId)
                 ->get();
             
             $config = $configs[0];
@@ -97,13 +99,14 @@ class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterf
      *
      * @return bool|mixed
      */
-    public function deleteConfig($pluginSetId, $deleted)
+    public function deleteConfig($pluginSetId, $webstoreId, $deleted)
     {
         try {
             $database = pluginApp(DataBase::class);
 
             $configs = $database->query(ShopWizardPreviewConfiguration::class)
                 ->where('pluginSetId', '=', $pluginSetId)
+                ->where('webstoreId', '=', $webstoreId)
                 ->get();
             
             $config = $configs[0];
@@ -126,7 +129,7 @@ class ShopWizardConfigRepository implements ShopWizardPreviewConfigurationInterf
      *
      * @return bool|mixed
      */
-    public function getConfig($pluginSetId)
+    public function getConfig($pluginSetId, $webstoreId = null)
     {
         if (array_key_exists($pluginSetId, $this->configList)) {
             return $this->configList[$pluginSetId];

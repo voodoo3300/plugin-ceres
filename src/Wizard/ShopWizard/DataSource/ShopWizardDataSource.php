@@ -103,14 +103,15 @@ class ShopWizardDataSource extends BaseWizardDataSource
      */
     public function deleteDataOption(string $optionId = 'default')
     {
-        $pluginSet = explode(".", $optionId)[1];
+        list($webstore, $pluginSet) = explode('.', $optionId);
+        $webstoreId = explode('_', $webstore)[1];
         $pluginSetId = explode('_', $pluginSet)[1];
 
         $previewConfRepo = pluginApp(ShopWizardConfigRepository::class);
         $confToDelete = $previewConfRepo->getConfig($pluginSetId);
 
         if ($confToDelete instanceof ShopWizardPreviewConfiguration) {
-            $previewConfRepo->deleteConfig($pluginSetId, true);
+            $previewConfRepo->deleteConfig($pluginSetId, $webstoreId, true);
         }
     }
 

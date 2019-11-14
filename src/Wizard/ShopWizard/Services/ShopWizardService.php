@@ -68,13 +68,23 @@ class ShopWizardService
                     if (
                         $pluginSetEntry instanceof PluginSetEntry &&
                         $pluginSetEntry->pluginId == $plugin->id &&
-                        !in_array($pluginSetEntry->pluginSetId, $webstoresPluginSetIds) &&
+                        // !in_array($pluginSetEntry->pluginSetId, $webstoresPluginSetIds) &&
                         $previewConfig instanceof ShopWizardPreviewConfiguration && !$previewConfig->deleted
                     ) {
-                        $webstores[] = [
-                            'id' => 'preview',
-                            'pluginSetId' => (int)$pluginSetEntry->pluginSetId
-                        ];
+                        if(is_null($previewConfig->webstoreId))
+                        {
+                            $webstores[] = [
+                                'id' => 'preview',
+                                'pluginSetId' => (int)$pluginSetEntry->pluginSetId
+                            ];
+                        }
+                        else
+                        {
+                            $webstores[] = [
+                                'id' => (int)$previewConfig->webstoreId,
+                                'pluginSetId' => (int)$pluginSetEntry->pluginSetId
+                            ];
+                        }
                     }
                 }
             }
