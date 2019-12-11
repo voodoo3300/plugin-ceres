@@ -68149,6 +68149,7 @@ function () {
       var placeholderRect = this.placeholder.getBoundingClientRect();
       var containerRect = this.getContainerElement().getBoundingClientRect();
       var maxBottom = Math.min(containerRect.bottom - elementRect.height - this.offsetTop - this.offsetBottom, 0);
+      var isFixedBottom = maxBottom < 0;
 
       if (oldValue.height !== elementRect.height && !skipOffsetCalculation) {
         this.calculateOffset();
@@ -68162,7 +68163,8 @@ function () {
         // eslint-disable-next-line id-length
         y: maxBottom + this.offsetTop,
         origY: placeholderRect.top,
-        isSticky: elementRect.height < containerRect.height && placeholderRect.top <= this.offsetTop
+        isSticky: elementRect.height < containerRect.height && placeholderRect.top <= this.offsetTop,
+        isFixedBottom: isFixedBottom
       };
     }
   }, {
@@ -68212,6 +68214,7 @@ function () {
       var styles = {
         position: null,
         top: null,
+        bottom: null,
         left: null,
         width: null,
         zIndex: null
@@ -68222,9 +68225,10 @@ function () {
 
       if (this.position.isSticky) {
         styles = {
-          position: "fixed",
-          top: this.position.y + "px",
-          left: this.position.x + "px",
+          position: this.position.isFixedBottom ? "absolute" : "fixed",
+          top: this.position.isFixedBottom ? null : this.position.y + "px",
+          bottom: this.position.isFixedBottom ? "0px" : null,
+          left: this.position.isFixedBottom ? null : this.position.x + "px",
           width: this.position.width + "px"
         };
         placeholderStyles = {
