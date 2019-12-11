@@ -1,5 +1,6 @@
 import { isNullOrUndefined } from "./utils";
 import { applyStyles } from "./dom";
+import { debounce } from "./debounce";
 
 const STICKY_EVENTS = [
     "resize",
@@ -22,7 +23,7 @@ export class StickyElement
         this.minWidth = minWidth;
         this.isMinWidth = true;
         this.resizeListener = this.checkMinWidth.bind(this);
-        window.addEventListener("resize", this.resizeListener);
+        window.addEventListener("resize", debounce(this.resizeListener));
         this.checkMinWidth();
 
         this.vm.$nextTick(() =>
@@ -51,10 +52,10 @@ export class StickyElement
             this.el.parentNode.insertBefore(this.placeholder, this.el);
             this.eventListener = this.tick.bind(this);
 
-            document.addEventListener("storeChanged", this.eventListener);
+            document.addEventListener("storeChanged", debounce(this.eventListener));
             STICKY_EVENTS.forEach(event =>
             {
-                window.addEventListener(event, this.eventListener);
+                window.addEventListener(event, debounce(this.eventListener));
             });
 
             this.enabled = true;

@@ -27350,10 +27350,10 @@ module.exports = toString;
 
 /***/ }),
 
-/***/ "./node_modules/moment/locale sync recursive [\\/\\\\](de(\\.js)?|fr(\\.js)?|it(\\.js)?|es(\\.js)?|tr(\\.js)?|nl(\\.js)?|pl(\\.js)?|se(\\.js)?|ru(\\.js)?|sk(\\.js)?|pt(\\.js)?|bg(\\.js)?|ro(\\.js)?)$":
-/*!************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/moment/locale sync [\/\\](de(\.js)?|fr(\.js)?|it(\.js)?|es(\.js)?|tr(\.js)?|nl(\.js)?|pl(\.js)?|se(\.js)?|ru(\.js)?|sk(\.js)?|pt(\.js)?|bg(\.js)?|ro(\.js)?)$ ***!
-  \************************************************************************************************************************************************************************************/
+/***/ "./node_modules/moment/locale sync recursive [/\\\\](de(\\.js)?|fr(\\.js)?|it(\\.js)?|es(\\.js)?|tr(\\.js)?|nl(\\.js)?|pl(\\.js)?|se(\\.js)?|ru(\\.js)?|sk(\\.js)?|pt(\\.js)?|bg(\\.js)?|ro(\\.js)?)$":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/moment/locale sync [/\\](de(\.js)?|fr(\.js)?|it(\.js)?|es(\.js)?|tr(\.js)?|nl(\.js)?|pl(\.js)?|se(\.js)?|ru(\.js)?|sk(\.js)?|pt(\.js)?|bg(\.js)?|ro(\.js)?)$ ***!
+  \***********************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27404,7 +27404,7 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = "./node_modules/moment/locale sync recursive [\\/\\\\](de(\\.js)?|fr(\\.js)?|it(\\.js)?|es(\\.js)?|tr(\\.js)?|nl(\\.js)?|pl(\\.js)?|se(\\.js)?|ru(\\.js)?|sk(\\.js)?|pt(\\.js)?|bg(\\.js)?|ro(\\.js)?)$";
+webpackContext.id = "./node_modules/moment/locale sync recursive [/\\\\](de(\\.js)?|fr(\\.js)?|it(\\.js)?|es(\\.js)?|tr(\\.js)?|nl(\\.js)?|pl(\\.js)?|se(\\.js)?|ru(\\.js)?|sk(\\.js)?|pt(\\.js)?|bg(\\.js)?|ro(\\.js)?)$";
 
 /***/ }),
 
@@ -30625,7 +30625,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive [\\/\\\\](de(\\
             try {
                 oldLocale = globalLocale._abbr;
                 var aliasedRequire = require;
-                __webpack_require__("./node_modules/moment/locale sync recursive [\\/\\\\](de(\\.js)?|fr(\\.js)?|it(\\.js)?|es(\\.js)?|tr(\\.js)?|nl(\\.js)?|pl(\\.js)?|se(\\.js)?|ru(\\.js)?|sk(\\.js)?|pt(\\.js)?|bg(\\.js)?|ro(\\.js)?)$")("./" + name);
+                __webpack_require__("./node_modules/moment/locale sync recursive [/\\\\](de(\\.js)?|fr(\\.js)?|it(\\.js)?|es(\\.js)?|tr(\\.js)?|nl(\\.js)?|pl(\\.js)?|se(\\.js)?|ru(\\.js)?|sk(\\.js)?|pt(\\.js)?|bg(\\.js)?|ro(\\.js)?)$")("./" + name);
                 getSetGlobalLocale(oldLocale);
             } catch (e) {}
         }
@@ -68021,6 +68021,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./utils */ "./resources/js/src/app/helper/utils.js");
 /* harmony import */ var _dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./dom */ "./resources/js/src/app/helper/dom.js");
+/* harmony import */ var _debounce__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./debounce */ "./resources/js/src/app/helper/debounce.js");
 
 
 
@@ -68032,6 +68033,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -68050,7 +68052,7 @@ function () {
     this.minWidth = minWidth;
     this.isMinWidth = true;
     this.resizeListener = this.checkMinWidth.bind(this);
-    window.addEventListener("resize", this.resizeListener);
+    window.addEventListener("resize", Object(_debounce__WEBPACK_IMPORTED_MODULE_7__["debounce"])(this.resizeListener));
     this.checkMinWidth();
     this.vm.$nextTick(function () {
       var containerElement = _this.getContainerElement();
@@ -68082,9 +68084,9 @@ function () {
         _this2.el.parentNode.insertBefore(_this2.placeholder, _this2.el);
 
         _this2.eventListener = _this2.tick.bind(_this2);
-        document.addEventListener("storeChanged", _this2.eventListener);
+        document.addEventListener("storeChanged", Object(_debounce__WEBPACK_IMPORTED_MODULE_7__["debounce"])(_this2.eventListener));
         STICKY_EVENTS.forEach(function (event) {
-          window.addEventListener(event, _this2.eventListener);
+          window.addEventListener(event, Object(_debounce__WEBPACK_IMPORTED_MODULE_7__["debounce"])(_this2.eventListener));
         });
         _this2.enabled = true;
 
@@ -68392,7 +68394,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
  * Makes a function executed after defined timeout.
  *
  * @param {function}    callback  The function to be executed after timeout
- * @param {number}      timeout   The timeout in milliseconds
+ * @param {number}      [timeout] The timeout in milliseconds
  *
  * @returns {function}
  */
@@ -68400,17 +68402,21 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 function debounce(callback, timeout) {
   timeout = Object(_utils__WEBPACK_IMPORTED_MODULE_10__["defaultValue"])(timeout, 0);
 
-  if (timeout > 0) {
+  if (timeout > 0 || typeof window.requestAnimationFrame === "function") {
     return function () {
       var args = arguments;
 
-      if (!Object(_utils__WEBPACK_IMPORTED_MODULE_10__["isNullOrUndefined"])(callback.__timeout)) {
-        window.clearTimeout(callback.__timeout);
+      if (timeout > 0) {
+        !Object(_utils__WEBPACK_IMPORTED_MODULE_10__["isNullOrUndefined"])(callback.__handle) ? window.clearTimeout(callback.__handle) : void 0;
+        callback.__handle = window.setTimeout(function () {
+          callback.apply(void 0, _toConsumableArray(args));
+        }, timeout);
+      } else {
+        !Object(_utils__WEBPACK_IMPORTED_MODULE_10__["isNullOrUndefined"])(callback.__handle) ? window.cancelAnimationFrame(callback.__handle) : void 0;
+        callback.__handle = window.requestAnimationFrame(function () {
+          callback.apply(void 0, _toConsumableArray(args));
+        });
       }
-
-      callback.__timeout = window.setTimeout(function () {
-        callback.apply(void 0, _toConsumableArray(args));
-      }, timeout);
     };
   }
 
