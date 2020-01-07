@@ -8,16 +8,6 @@ body, body .wrapper-main{
     display: none !important;
 }
 
-.hidden {
-    display: none;
-}
-
-.hidden-sm {
-    @include media-breakpoint-only(sm) {
-        display: none;
-    }
-}
-
 .category-contact .main .container-max
 {
     background-color: $white;
@@ -70,23 +60,6 @@ body, body .wrapper-main{
     text-shadow: 4px 3px 0 #F7F7F9, 9px 8px 0 rgba(218, 218, 227, 0.50);
 }
 
-.rating{
-    line-height: 1;
-
-    .tag,
-    .badge {
-        padding-right: 0;
-        overflow: hidden;
-        cursor: pointer;
-
-        .amount{
-            padding: 0.1rem .6rem 0.1rem .4rem;
-            margin-left: .2rem;
-            background-color: $gray;
-        }
-    }
-}
-
 dt {
     font-weight: 400;
 }
@@ -96,11 +69,6 @@ a:focus,
 a:active {
     text-decoration: none;
 }
-
-.border-left {
-    border-left: 1px solid $gray-dark;
-}
-
 
 .carousel-control-next, .carousel-control-prev {
     position: absolute;
@@ -128,20 +96,6 @@ a:active {
     background-size: 100% 100%;
 }
 
-.content-center {
-    margin: 0 auto;
-    float: none;
-}
-
-.flex-center {
-    align-items: center;
-    justify-content: center;
-}
-
-.text-wrap {
-  white-space: normal;
-}
-
 .is_stuck {
     z-index: 1;
 }
@@ -157,7 +111,7 @@ a:active {
 }
 
 @each $color, $value in $theme-colors {
-    @include bg-variant(".bg-#{$color}", $value);
+    // @include bg-variant(".bg-#{$color}", $value);
     .bg-#{$color} {
         @include context-bg($value);
     }
