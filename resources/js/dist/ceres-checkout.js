@@ -65965,6 +65965,7 @@ vue__WEBPACK_IMPORTED_MODULE_14___default.a.component("lazy-load", _app_componen
 window.ceresTranslate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_73__["default"].translate;
 vue__WEBPACK_IMPORTED_MODULE_14___default.a.prototype.$translate = _app_services_TranslationService__WEBPACK_IMPORTED_MODULE_73__["default"].translate;
 vue__WEBPACK_IMPORTED_MODULE_14___default.a.prototype.$ceres = App;
+document.dispatchEvent(new CustomEvent("ceres-ready", {}));
 
 /***/ }),
 
