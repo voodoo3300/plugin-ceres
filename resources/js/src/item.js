@@ -10,3 +10,6 @@ Vue.component("order-property-list", () => import("./app/components/item/OrderPr
 
 import SingleItem from "./app/components/item/SingleItem.vue";
 Vue.component("single-item", SingleItem);
+
+import SingleItemSetSlot from "./app/components/item/SingleItemSetSlot.vue";
+Vue.component("single-item-set-slot", SingleItemSetSlot);
