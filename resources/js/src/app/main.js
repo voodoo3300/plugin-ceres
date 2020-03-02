@@ -402,3 +402,34 @@ function fixPopperZIndexes()
         }
     });
 }
+
+// optimize css delivery
+// see: https://developers.google.com/speed/docs/insights/OptimizeCSSDelivery
+
+const loadDeferredStyles = function()
+{
+    const styleNodes = [].slice.call(document.querySelectorAll("noscript[data-load-css]"));
+
+    styleNodes.forEach(styleNode =>
+    {
+        const replacementContainer = document.createElement("div");
+
+        replacementContainer.innerHTML = styleNode.textContent;
+        document.body.appendChild(replacementContainer);
+        styleNode.parentElement.removeChild(styleNode);
+    });
+};
+const raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+    window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
+if (raf)
+{
+    raf(function()
+    {
+        window.setTimeout(loadDeferredStyles, 0);
+    });
+}
+else
+{
+    window.addEventListener("load", loadDeferredStyles);
+}
