@@ -59,7 +59,8 @@ export default {
         {
             type: String,
             default: ""
-        }
+        },
+        variation: Object
     },
 
     data()
@@ -91,9 +92,10 @@ export default {
             ).slice(0, this.maxQuantity);
         },
 
-        ...mapState({
-            currentVariation: state => state.item.variation
-        })
+        currentVariation()
+        {
+            return this.variation || this.$store.state.item.variation;
+        }
     },
 
     watch: {

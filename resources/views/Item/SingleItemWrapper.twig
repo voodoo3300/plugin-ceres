@@ -78,43 +78,41 @@
         {% set shopBuilderTemplate = shop_builder_category_template(currentCategory.id, isItemSet ? "itemset" : "singleitem") %}
     {% endif %}
 
-    {% if item.documents[0].data.item.add_cms_page > 0 and not isShopBuilder %}
-        {# Item template is configured for the item #}
-        {% set template %}
-            {% include [category_template( item.documents[0].data.item.add_cms_page, lang, webstoreConfig.webstoreId ), "Ceres::Item.SingleItemView"] %}
-        {% endset %}
-
-        {% if template | trim is not empty %}
-            {{ template }}
-        {% else %}
-            {% include "Ceres::Item.SingleItemView" %}
-        {% endif %}
-
-    {% elseif shopBuilderTemplate | trim is not empty or isShopBuilder %}
-        {# Shopbuilder template #}
-        <div class="single container-max page-content">
-            <div class="row">
-                <div class="col">
-                    <single-item
-                        v-cloak
-                        item-data="{{ item | json_data }}"
-                        attributes-data="{{ attributes | json_data }}"
-                        variations="{{ variations | json_data }}"
-                        :please-select-option-variation-id="{{ dynamicVariationId }}"
-                        :init-please-select-option="{{ initPleaseSelectOption | json_encode }}"
-                        :show-net-prices="{{ services.customer.showNetPrices() | json_encode }}"
-                        :is-wish-list-enabled="{{ services.url.isRouteEnabled("wish-list") | json_encode }}"
-                        v-slot="slotProps">
-                        {{ shopBuilderTemplate | raw }}
-                    </single-item>
-                </div>
+    {# Shopbuilder template #}
+    <div class="single container-max page-content">
+        <div class="row">
+            <div class="col">
+                <single-item
+                    v-cloak
+                    item-data="{{ item | json_data }}"
+                    attributes-data="{{ attributes | json_data }}"
+                    variations="{{ variations | json_data }}"
+                    :please-select-option-variation-id="{{ dynamicVariationId }}"
+                    :init-please-select-option="{{ initPleaseSelectOption | json_encode }}"
+                    :show-net-prices="{{ services.customer.showNetPrices() | json_encode }}"
+                    :is-wish-list-enabled="{{ services.url.isRouteEnabled("wish-list") | json_encode }}"
+                    v-slot="slotProps">
+                    {# Set items #}
+                        <single-item-set-slot :variation-id="1032" v-slot="slotProps">
+                            <h1>${ slotProps.currentVariation.documents[0].data | itemName }</h1>
+                            <item-image-carousel :variation="slotProps.currentVariation" plugin-path="{{ plugin_path('Ceres') }}" image-url-accessor="url"></item-image-carousel>
+                        </single-item-set-slot>
+                        <single-item-set-slot :variation-id="1028" v-slot="slotProps">
+                            <h1>${ slotProps.currentVariation.documents[0].data | itemName }</h1>
+                            <item-image-carousel :variation="slotProps.currentVariation" plugin-path="{{ plugin_path('Ceres') }}" image-url-accessor="url"></item-image-carousel>
+                        </single-item-set-slot>
+                        <single-item-set-slot :variation-id="1021" v-slot="slotProps">
+                            <h1>${ slotProps.currentVariation.documents[0].data | itemName }</h1>
+                            <item-image-carousel :variation="slotProps.currentVariation" plugin-path="{{ plugin_path('Ceres') }}" image-url-accessor="url"></item-image-carousel>
+                        </single-item-set-slot>
+                        <single-item-set-slot :variation-id="1022" v-slot="slotProps">
+                            <h1>${ slotProps.currentVariation.documents[0].data | itemName }</h1>
+                            <item-image-carousel :variation="slotProps.currentVariation" plugin-path="{{ plugin_path('Ceres') }}" image-url-accessor="url"></item-image-carousel>
+                        </single-item-set-slot>
+                    {# Set items #}
+                </single-item>
             </div>
         </div>
-    {% elseif shop_builder_category_template_exists() %}
-        {# Empty shop builder template is loading #}
-    {% else %}
-        {# No item template defined in ShopBuilder => use default template from plugin #}
-        {% include "Ceres::Item.SingleItemView" %}
-    {% endif %}
+    </div>
 
 {% endblock %}
