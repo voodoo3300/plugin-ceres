@@ -1,6 +1,6 @@
 <template>
     <div>
-        <template v-if="autocompleteResult.length">
+        <template v-if="autocompleteResult && autocompleteResult.length">
             <div>
                 <a
                     v-for="(item, index) in autocompleteResult"
@@ -10,17 +10,17 @@
                     :key="index"
                     :href="getTargetUrl(item)">
 
-                    <div class="image mr-3" v-if="showItemImages">
+                    <div class="image flex-shrink-0 mr-3" v-if="showImages">
                         <img v-if="item.image" :src="item.image">
                     </div>
 
-                    <div class="label" :class="{ 'compact': item.beforeLabel && item.afterLabel }">
-                        <p class="small mb-0" v-if="item.beforeLabel">{{ item.beforeLabel }}</p>
-                        <p class="mb-0" v-html="getHighlightedLabel(item.label)"></p>
-                        <p class="small mb-0" v-if="item.afterLabel">{{ item.afterLabel }}</p>
+                    <div class="label overflow-hidden" :class="{ 'compact': showAdditionalInformation && item.beforeLabel && item.afterLabel }">
+                        <p class="small mb-0 text-truncate" v-if="showAdditionalInformation && item.beforeLabel">{{ item.beforeLabel }}</p>
+                        <p class="mb-0 text-truncate" v-html="getHighlightedLabel(item.label)"></p>
+                        <p class="small mb-0 text-truncate" v-if="showAdditionalInformation && item.afterLabel">{{ item.afterLabel }}</p>
                     </div>
 
-                    <div class="count" v-if="item.count > 0">
+                    <div class="count" v-if="showCount && item.count > 0">
                         <span>{{ item.count }}</span>
                     </div>
                 </a>
@@ -40,10 +40,7 @@ import { mapState } from 'vuex';
 export default {
     props:
     {
-        showItemImages:
-        {
-            type: Boolean
-        },
+        showImages: Boolean,
 
         paddingClasses:
         {
@@ -61,7 +58,11 @@ export default {
         {
             type: String,
             required: true
-        }
+        },
+
+        showCount: Boolean,
+
+        showAdditionalInformation: Boolean
     },
 
     computed:
