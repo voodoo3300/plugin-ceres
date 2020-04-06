@@ -13,7 +13,7 @@ class CategoryContext extends GlobalContext implements ContextInterface
 
     public $metaRobots;
 
-    public $assetName = "ceres-category";
+    public $assetName = "ceres-item";
 
     public function init($params)
     {
