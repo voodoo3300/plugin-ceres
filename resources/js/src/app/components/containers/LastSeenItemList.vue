@@ -6,8 +6,9 @@
 
         <div class="col-12">
             <carousel :items-per-page="itemsPerPage">
-                <template slot="items" v-for="item in items">
+                <template #items>
                     <category-item
+                            v-for="item in items"
                             :key="item.id"
                             :item-data="item.data"
                             :decimal-count="$ceres.config.item.storeSpecial"
