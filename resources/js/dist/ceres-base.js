@@ -50772,6 +50772,7 @@ function CeresMain() {
 
   $("[data-toggle=\"tooltip\"]").tooltip();
   HeaderCollapse("#countrySettings");
+  HeaderCollapse("#uhrenrudloff-info");
   HeaderCollapse("#currencySelect");
   HeaderCollapse("#searchBox");
   var $mainNavbarCollapse = $("#mainNavbarCollapse"); // prevent hidding collapses in the shopbuilder, for editing search bar results
@@ -50841,6 +50842,7 @@ function CeresMain() {
     });
     $("#accountMenuList").click(function () {
       $("#countrySettings").collapse("hide");
+      $("#uhrenrudloff-info").collapse("hide");
       $("#searchBox").collapse("hide");
       $("#currencySelect").collapse("hide");
     });
